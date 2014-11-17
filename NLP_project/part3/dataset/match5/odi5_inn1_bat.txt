@@ -1,0 +1,7 @@
+MJ Guptill,c Mohammed Shami b Aaron,16,54,35,2,0,45.71,New Zealand
+JD Ryder,c Rahane b Kumar,17,33,26,1,1,65.38,New Zealand
+KS Williamson,c Rahane b Aaron,88,117,91,8,1,96.70,New Zealand
+LRPL Taylor,c Dhawan b Mohammed Shami,102,148,106,10,1,96.22,New Zealand
+BB McCullum,c Sharma b Kohli,23,28,18,1,1,127.77,New Zealand
+JDS Neesham,not out,34,32,19,3,2,178.94,New Zealand
+L Ronchi,not out,11,9,5,2,0,220.00,New Zealand

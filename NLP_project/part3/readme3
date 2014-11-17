@@ -1,0 +1,20 @@
+abstract::
+-This project includes answering cricket queries(AI based chat bot) on the basis of the commentary of the match ,commentary is not entirely free text, it has some structure and on the basis of the questions asked, we have to figure out what kind of data would you need to save or recover from that semi­structured commentary.
+-the sentences are little more ambigous that the previous sentences and also dont follow any specific grammar
+-the searching is done on the basis of unigram and bigram model and calculating the wup_similarity between query and commentary to get results which are stored for further research.
+-this is still in the development phase so all queries wont work.
+
+description ::
+-pos taggin of all the words occuring in the question
+-retrieving the player information about whom the question is framed
+-parsing the question and extracting the keywaords used to evaluate the query.
+-extracting a set of relavant commentary lines based on the huristic function of similarity between the words of query and sentence
+-selecting the most relavant line from the set of shortlisted lines
+-extracting the part of line needed to answer the given query and return the answer,if answer is not found return the commentary line.
+
+Rough grammar ::
+queries involving words like 'dismissed' or 'bowled'or 'wickets' or 'wicket' or 'economy rate' or 'no ball' or 'no balls' or 'wide' or 'wides' or 'boundary' or "four" or "six" or "strike rate" or 'out' or 'dismissed' or 'fours' or 'sixes' or 'hit'
+and answer to questions like 'which' or 'who'
+
+run command*
+>> python part3.py <input3 3>output3

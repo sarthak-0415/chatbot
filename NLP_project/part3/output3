@@ -1,0 +1,36 @@
+[H[2J
+input
+
+Case #0
+
+select commentary::
+[['3.6'], ['Mohammed', 'Shami', 'to', 'Ryder,', 'OUT,', 'and', 'Shami', 'gets', 'him', 'with', 'a', 'fuller', 'one', 'on', 'a', 'similar', 'line', 'as', 'Ryder', 'is', 'in', 'two', 'minds', 'to', 'play', 'this', 'one,', 'looking', 'to', 'once', 'again', 'go', 'for', 'the', 'pick-up', 'flick,', 'but', 'was', 'never', 'really', 'in', 'position', 'for', 'it', 'to', 'be', 'executed', 'properly']]
+
+ans::
+3.6
+
+
+
+
+input
+
+Case #1
+
+select commentary::
+[['Matt:', '"For', 'all', 'the', 'build', 'up', 'NZ', 'is', 'playing', 'remarkably', 'tentative.', 'Ryder', 'may', 'have', 'accelerated', 'but', 'looked', 'uncertain', 'between', 'boundaries', 'and', 'no', 'one', 'else', 'has', 'got', 'going', 'yet.', 'Getting', 'an', 'uneasy', 'feeling', 'for', 'the', 'series', 'that', 'NZ', 'may', 'already', 'be', 'over-awed."'], ['And', 'with', 'that', 'late', 'flourish', 'New', 'Zealand', 'reach', 'a', 'strong', 'total', 'of', '292', 'for', '7.', 'Anderson', 'was', 'back', 'to', 'his', 'brilliant', 'best', 'with', 'an', 'unbeaten', '64', 'off', '40,', 'which', 'included', 'some', 'monster', 'hits', 'onto', 'the', 'roof.', 'But', 'this', 'innings', 'was', 'crafted', 'initially', 'by', 'Kane', 'Williamson,', 'who', 'stroked', 'his', 'way', 'to', '71', 'to', 'help', 'guide', 'New', 'Zealand.', 'Taylor', '(55)', 'and', 'Ronchi', '(30)', 'played', 'important', 'supporting', 'roles', 'as', 'the', 'India', 'bowlers', 'were', 'unable', 'to', 'keep', 'a', 'tight', 'lid', 'on', 'the', 'scoring,', 'despite', 'their', 'best', 'efforts', 'early', 'on.', 'No', 'surprise', 'as', 'to', 'who', 'was', 'the', 'pick', 'of', 'the', 'Indian', 'bowlers,', 'as', 'Mohammed', 'Shami,', 'despite', 'suffering', 'some', 'back', 'trouble', 'midway', 'through', 'his', 'spell,', 'was', 'able', 'to', 'pull', 'off', 'an', 'impressive', 'haul', 'of', '4', 'for', '55.', 'We', 'will', 'be', 'back', 'shortly', 'for', "India's", 'replay']]
+
+ans::
+[['Matt:', '"For', 'all', 'the', 'build', 'up', 'NZ', 'is', 'playing', 'remarkably', 'tentative.', 'Ryder', 'may', 'have', 'accelerated', 'but', 'looked', 'uncertain', 'between', 'boundaries', 'and', 'no', 'one', 'else', 'has', 'got', 'going', 'yet.', 'Getting', 'an', 'uneasy', 'feeling', 'for', 'the', 'series', 'that', 'NZ', 'may', 'already', 'be', 'over-awed."'], ['And', 'with', 'that', 'late', 'flourish', 'New', 'Zealand', 'reach', 'a', 'strong', 'total', 'of', '292', 'for', '7.', 'Anderson', 'was', 'back', 'to', 'his', 'brilliant', 'best', 'with', 'an', 'unbeaten', '64', 'off', '40,', 'which', 'included', 'some', 'monster', 'hits', 'onto', 'the', 'roof.', 'But', 'this', 'innings', 'was', 'crafted', 'initially', 'by', 'Kane', 'Williamson,', 'who', 'stroked', 'his', 'way', 'to', '71', 'to', 'help', 'guide', 'New', 'Zealand.', 'Taylor', '(55)', 'and', 'Ronchi', '(30)', 'played', 'important', 'supporting', 'roles', 'as', 'the', 'India', 'bowlers', 'were', 'unable', 'to', 'keep', 'a', 'tight', 'lid', 'on', 'the', 'scoring,', 'despite', 'their', 'best', 'efforts', 'early', 'on.', 'No', 'surprise', 'as', 'to', 'who', 'was', 'the', 'pick', 'of', 'the', 'Indian', 'bowlers,', 'as', 'Mohammed', 'Shami,', 'despite', 'suffering', 'some', 'back', 'trouble', 'midway', 'through', 'his', 'spell,', 'was', 'able', 'to', 'pull', 'off', 'an', 'impressive', 'haul', 'of', '4', 'for', '55.', 'We', 'will', 'be', 'back', 'shortly', 'for', "India's", 'replay']]
+
+
+
+
+input
+
+Case #2
+
+select commentary::
+[['Kimbo14:', '"@', 'Mick', 'H,', 'Andrew', 'Jones', 'was', 'a', 'very', 'under', 'rated', 'cricketer', 'for', 'New', 'Zealand', 'and', 'did', 'a', 'great', 'job', 'at', 'number', '3.', 'Williamson', 'seems', 'to', 'have', 'a', 'similar', 'consistency', 'about', 'him', 'as', 'Jones', 'did', '-', 'just', 'gets', 'on', 'with', 'the', 'job', 'with', 'no', 'fuss', 'or', 'big', 'lusty', 'blows', '...', 'teams', 'will', 'get', 'caught', 'out', 'with', 'their', 'focus', 'on', 'Taylor,', 'McCullum', 'and', 'Co."'], ['Jesse', 'Pinkman:', '"WASP', 'was', 'stupid', 'in', 'my', 'opinion.', 'India', 'had', 'a', 'WASP', 'of', '13%', 'while', 'chasing', 'in', 'the', 'Napier', 'game.', 'This', 'happened', 'when', 'Kohli', 'was', '100+', 'and', 'Dhoni', 'was', 'also', 'going', 'well', 'and', 'India', 'certainly', 'looked', 'on', 'track', 'during', 'the', 'batting', 'powerplay."']]
+
+ans::
+[['Kimbo14:', '"@', 'Mick', 'H,', 'Andrew', 'Jones', 'was', 'a', 'very', 'under', 'rated', 'cricketer', 'for', 'New', 'Zealand', 'and', 'did', 'a', 'great', 'job', 'at', 'number', '3.', 'Williamson', 'seems', 'to', 'have', 'a', 'similar', 'consistency', 'about', 'him', 'as', 'Jones', 'did', '-', 'just', 'gets', 'on', 'with', 'the', 'job', 'with', 'no', 'fuss', 'or', 'big', 'lusty', 'blows', '...', 'teams', 'will', 'get', 'caught', 'out', 'with', 'their', 'focus', 'on', 'Taylor,', 'McCullum', 'and', 'Co."'], ['Jesse', 'Pinkman:', '"WASP', 'was', 'stupid', 'in', 'my', 'opinion.', 'India', 'had', 'a', 'WASP', 'of', '13%', 'while', 'chasing', 'in', 'the', 'Napier', 'game.', 'This', 'happened', 'when', 'Kohli', 'was', '100+', 'and', 'Dhoni', 'was', 'also', 'going', 'well', 'and', 'India', 'certainly', 'looked', 'on', 'track', 'during', 'the', 'batting', 'powerplay."']]

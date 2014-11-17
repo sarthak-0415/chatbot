@@ -1,0 +1,90 @@
+[H[2J
+input (following grammar)
+
+Case #0
+predicates involved::
+['mom', 'win']
+query::
+for all/match.mom/win.ifthen
+generated query::
+all m.exists c1.exists c2.exists p1.exists p2.(mom(m,c1,p1) => win(m,c2))
+answer::
+The anwer for the query is :  True
+
+
+input (following grammar)
+
+Case #1
+predicates involved::
+['duck', 'loss']
+query::
+for all/match.duck/loss.ifthen
+generated query::
+all m.exists c1.exists c2.exists p1.exists p2.(duck(m,c1,p1) => loss(m,c2))
+answer::
+The anwer for the query is :  True
+
+
+input (following grammar)
+
+Case #2
+predicates involved::
+['six_gt_four', 'strike_gt_200']
+query::
+for all/innings.six_gt_four/strike_gt_200.ifthen
+generated query::
+all m.exists c1.exists c2.exists p1.exists p2.(six_gt_four(m,c1,p1) => strike_gt_200(m,c2,p2))
+answer::
+The anwer for the query is :  True
+
+
+input (following grammar)
+
+Case #3
+predicates involved::
+['win']
+query::
+for all/match.win.ifthen
+generated query::
+all m.exists c1.exists c2.exists p1.exists p2.(win(m,c1) => strike_gt_200(m,c2,p2))
+answer::
+The anwer for the query is :  True
+
+
+input (following grammar)
+
+Case #4
+predicates involved::
+['wicket_gt_0', 'runs_gt_50']
+query::
+there exist/player.wicket_gt_0/runs_gt_50.ifthen
+generated query::
+exists p.exists m1.exists m2.exists c1.exists c2.(wicket_gt_0(m1,c1,p) => runs_gt_50(m2,c2,p))
+answer::
+The anwer for the query is :  True
+
+
+input (following grammar)
+
+Case #5
+predicates involved::
+['over_gt_7', 'wicket_lt_0']
+query::
+for all/match.over_gt_7/wicket_lt_0.ifthen
+generated query::
+all m.exists c1.exists c2.exists p1.exists p2.(over_gt_7(m,c1,p1) => wicket_lt_0(m,c2,p2))
+answer::
+The anwer for the query is :  Undefined
+
+
+input (following grammar)
+
+Case #6
+predicates involved::
+['wicket_lt_0']
+query::
+in any of the/match.wicket_lt_0.ifthen
+generated query::
+exists m.exists c1.exists c2.exists p1.exists p2.(wicket_lt_0(m,c1,p1) => wicket_lt_0(m,c2,p2))
+answer::
+The anwer for the query is :  True

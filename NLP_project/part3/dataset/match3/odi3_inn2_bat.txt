@@ -1,0 +1,11 @@
+RG Sharma,c Bennett b Anderson,39,65,38,1,4,102.63,India
+S Dhawan,c Guptill b Anderson,28,46,25,4,1,112.00,India
+V Kohli,c Ronchi b Bennett,6,27,20,1,0,30.00,India
+AM Rahane,c Ronchi b Anderson,3,22,14,0,0,21.42,India
+SK Raina,c Ronchi b Southee,31,59,39,3,0,79.48,India
+MS Dhoni,c Southee b Anderson,50,79,60,2,3,83.33,India
+R Ashwin,c Guptill b NL McCullum,65,78,46,8,1,141.30,India
+RA Jadeja,not out,66,77,45,5,4,146.66,India
+B Kumar,c NL McCullum b Bennett,4,5,3,1,0,133.33,India
+Mohammed Shami,c Williamson b Anderson,2,11,7,0,0,28.57,India
+VR Aaron,not out,2,14,3,0,0,66.66,India

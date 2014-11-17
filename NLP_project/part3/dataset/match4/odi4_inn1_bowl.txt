@@ -1,0 +1,6 @@
+KD Mills,10,2,42,1,4.20,,New Zealand
+TG Southee,10,1,36,2,3.60,(2w),New Zealand
+HK Bennett,9,0,67,1,7.44,(3w),New Zealand
+JDS Neesham,8,0,59,0,7.37,(1w),New Zealand
+NL McCullum,10,0,44,0,4.40,,New Zealand
+KS Williamson,3,0,26,1,8.66,,New Zealand

@@ -1,0 +1,85 @@
+[H[2J
+input (following grammar) 
+<full question> : <info about match> <description> <question>
+
+Case #0
+
+ans_desc::
+[['25.1'], ['NL', 'McCullum', 'to', 'Kohli', 'SIX', 'Kohli', 'has', 'had', 'enough', 'as', 'he', 'advances', 'down', 'the', 'track', 'to', 'clear', 'Nathan', 'handsomely', 'over', 'long-off.', 'Excellent', 'use', 'of', 'the', 'feet', 'there', 'from', 'the', 'Delhi', 'batsman'], ['43.1'], ['NL', 'McCullum', 'to', 'Kohli', 'SIX', 'Kohli', 'has', 'had', 'enough', 'and', 'goes', 'after', 'Nathan', 'as', 'he', 'just', 'bludgeons', 'this', 'over', 'midwicket', 'for', 'a', 'huge', 'six']]
+
+parsed_query::
+first .Kohli hit sixes in overs of.which bowlers 
+
+ans_ques::
+[['NL', 'McCullum'], ['NL', 'McCullum']]
+
+
+
+
+input (following grammar) 
+<full question> : <info about match> <description> <question>
+
+Case #1
+
+ans_desc::
+[['32.6'], ['Jadeja', 'to', 'Williamson', 'OUT', 'and', 'all', 'that', 'good', 'work', 'comes', 'undone', 'as', 'this', 'is', 'lofted', 'straight', 'to', 'Rahane', 'who', 'is', 'stationed', 'at', 'silly', 'mid-off.', 'Williamson', 'deserved', 'to', 'go', 'for', 'a', 'centruy', 'but', 'it', 'looks', 'like', 'he', 'had', 'a', 'lapse', 'of', 'concentration', 'there']]
+
+parsed_query::
+first .Williamson was out in.which over 
+
+ans_ques::
+['32']
+
+
+
+
+input (following grammar) 
+<full question> : <info about match> <description> <question>
+
+Case #2
+
+ans_desc::
+[['37.4'], ['Jadeja', 'to', 'Taylor', 'FOUR', 'pushed', 'to', 'the', 'leg', 'side', 'by', 'Taylor', 'but', 'cant', 'pinch', 'a', 'run'], ['40.1'], ['Aaron', 'to', 'Taylor', 'FOUR', 'full', 'and', 'just', 'outside', 'off', 'as', 'Taylor', 'gets', 'an', 'edge', 'on', 'it', 'to', 'get', 'a', 'streaky', 'boundary', 'through', 'third', 'man']]
+
+parsed_query::
+third .Taylor hit fours in.which overs 
+
+ans_ques::
+['37', '40']
+
+
+
+
+input (following grammar) 
+<full question> : <info about match> <description> <question>
+
+Case #3
+
+ans_desc::
+[['30.1'], ['Williamson', 'to', 'Dhoni', 'SIX', 'but', 'this', 'one', 'will', 'take', 'a', 'bit', 'of', 'time', 'I', 'think.', 'Dhoni', 'has', 'launched', 'it', 'straight', 'out', 'of', 'the', 'ground', 'Magnificently', 'muscled', 'as', 'he', 'charges', 'down', 'the', 'pitch', 'first', 'ball', 'and', 'slogs', 'him', 'over', 'midwicket'], ['49.2'], ['Neesham', 'to', 'Dhoni', 'SIX', 'whack', 'Dont', 'bowl', 'length', 'to', 'me', 'Dhoni', 'seemed', 'to', 'say', 'with', 'this', 'shot.', 'Got', 'forward', 'and', 'slammed', 'it', 'over', 'wide-long', 'on.', 'Came', 'off', 'the', 'toe', 'but', 'it', 'is', 'Dhoni', 'after', 'all'], ['49.6'], ['Neesham', 'to', 'Dhoni', 'SIX', 'he', 'has', 'crunched', 'it', 'and', 'it', 'clears', 'the', 'banks', 'again', 'thats', 'the', 'second', 'time', 'he', 'has', 'put', 'the', 'ball', 'in', 'the', 'trees', 'beyond', 'the', 'midwicket', 'boundary.', 'It', 'was', 'a', 'scrambled-seam', 'length', 'ball', 'and', 'Dhoni', 'saw', 'it', 'early', 'and', 'smacks', 'it', 'away.', 'What', 'a', 'finish', 'by', 'the', 'India', 'captain']]
+
+parsed_query::
+fourth .Dhoni hit six in over 30 in.which ball 
+
+ans_ques::
+['1', '6']
+
+
+
+
+input (following grammar) 
+<full question> : <info about match> <description> <question>
+
+Case #4
+
+ans_desc::
+[['17.3'], ['Anderson', 'to', 'Rahane', '1', 'wide', 'gets', 'this', 'one', 'down', 'the', 'leg', 'side', 'as', 'the', 'umpire', 'signals', 'a', 'wide'], ['37.3'], ['Anderson', 'to', 'Jadeja', '1', 'wide', 'gets', 'the', 'line', 'horribly', 'wrong', 'as', 'this', 'is', 'dished', 'down', 'the', 'leg', 'side'], ['37.3'], ['Anderson', 'to', 'Jadeja', '1', 'wide', 'tries', 'to', 'tease', 'him', 'with', 'another', 'short', 'one', 'down', 'the', 'leg', 'side', 'but', 'is', 'called', 'a', 'wide', 'once', 'more', 'with', 'Anderson', 'unimpressed', 'as', 'he', 'grumbles', 'back', 'to', 'his', 'mark'], ['49.2'], ['Anderson', 'to', 'Jadeja', '1', 'wide', 'Jadeja', 'thought', 'about', 'shuffling', 'to', 'the', 'leg', 'side', 'but', 'decides', 'to', 'hold', 'his', 'ground', 'as', 'he', 'sees', 'this', 'short', 'ball', 'slanting', 'down', 'the', 'leg', 'side.', 'Umpire', 'calls', 'a', 'wide', 'and', 'NZ', 'have', 'a', 'hissy', 'fit'], ['49.4'], ['Anderson', 'to', 'Jadeja', '1', 'wide', 'an', 'attempted', 'yorker', 'speared', 'down', 'the', 'leg', 'side', 'as', 'he', 'gets', 'well', 'out', 'of', 'its', 'way', 'with', 'the', 'umpire', 'calling', 'yet', 'another', 'wide']]
+
+parsed_query::
+third .Anderson bowled maximum wides in.which over .MAX
+
+ans_ques::
+['37', '49']
+
+
+

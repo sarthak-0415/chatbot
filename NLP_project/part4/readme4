@@ -1,0 +1,5 @@
+abstract ::
+-the project is same as project 3 with a slight difference in the huristic function
+-in previous project the huristic value was calculated by the similarity of unigrams and bigrams in the sentence and the sentence having maximum similarity score was returned
+- in the project we have modified the huristic function by calculating the synsets of every word and calculating the similarity score on the basis of these synsets rather than taking only unigrams and bigrams into consideration.
+-the result shown by this huristic function was better than the previous huristics used

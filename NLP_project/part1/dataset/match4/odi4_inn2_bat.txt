@@ -1,0 +1,5 @@
+MJ Guptill,lbw b Mohammed Shami,35,35,27,6,1,129.62,New Zealand
+JD Ryder,b Aaron,19,30,18,4,0,105.55,New Zealand
+KS Williamson,run out (Jadeja),60,100,82,2,2,73.17,New Zealand
+LRPL Taylor,not out,112,152,127,15,0,88.18,New Zealand
+BB McCullum,not out,49,56,36,4,3,136.11,New Zealand

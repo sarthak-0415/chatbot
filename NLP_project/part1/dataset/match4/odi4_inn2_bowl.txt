@@ -1,0 +1,7 @@
+B Kumar,10,0,62,0,6.20,,India
+Mohammed Shami,8,0,61,1,7.62,(1w),India
+VR Aaron,6.1,0,51,1,8.27,(1w),India
+RA Jadeja,10,2,33,0,3.30,,India
+R Ashwin,10,0,41,0,4.10,(1nb, 1w),India
+STR Binny,1,0,8,0,8.00,,India
+AT Rayudu,3,0,23,0,7.66,,India

@@ -1,0 +1,47 @@
+[H[2J
+input
+
+Case #0
+
+select commentary::
+matching line :: 
+['I', 'Sharma', 'to', 'Williamson,', '2', 'runs,', 'played', 'away', 'towards', 'deep', 'extra-cover', 'to', 'bring', 'the', 'over', 'to', 'an', 'end'] ['Matt:', '"For', 'all', 'the', 'build', 'up', 'NZ', 'is', 'playing', 'remarkably', 'tentative.', 'Ryder', 'may', 'have', 'accelerated', 'but', 'looked', 'uncertain', 'between', 'boundaries', 'and', 'no', 'one', 'else', 'has', 'got', 'going', 'yet.', 'Getting', 'an', 'uneasy', 'feeling', 'for', 'the', 'series', 'that', 'NZ', 'may', 'already', 'be', 'over-awed."']
+
+
+ans::
+    2             
+
+
+
+
+input
+
+Case #1
+
+select commentary::
+matching line :: 
+['I', 'Sharma', 'to', 'Williamson,', '2', 'runs,', 'played', 'away', 'towards', 'deep', 'extra-cover', 'to', 'bring', 'the', 'over', 'to', 'an', 'end'] ['Matt:', '"For', 'all', 'the', 'build', 'up', 'NZ', 'is', 'playing', 'remarkably', 'tentative.', 'Ryder', 'may', 'have', 'accelerated', 'but', 'looked', 'uncertain', 'between', 'boundaries', 'and', 'no', 'one', 'else', 'has', 'got', 'going', 'yet.', 'Getting', 'an', 'uneasy', 'feeling', 'for', 'the', 'series', 'that', 'NZ', 'may', 'already', 'be', 'over-awed."']
+
+
+ans::
+[['I', 'Sharma', 'to', 'Williamson,', '2', 'runs,', 'played', 'away', 'towards', 'deep', 'extra-cover', 'to', 'bring', 'the', 'over', 'to', 'an', 'end'], ['Matt:', '"For', 'all', 'the', 'build', 'up', 'NZ', 'is', 'playing', 'remarkably', 'tentative.', 'Ryder', 'may', 'have', 'accelerated', 'but', 'looked', 'uncertain', 'between', 'boundaries', 'and', 'no', 'one', 'else', 'has', 'got', 'going', 'yet.', 'Getting', 'an', 'uneasy', 'feeling', 'for', 'the', 'series', 'that', 'NZ', 'may', 'already', 'be', 'over-awed."']]
+
+
+
+
+input
+
+Case #2
+
+select commentary::
+matching line :: 
+['1.1'] ['Southee', 'to', 'Kohli,', 'no', 'run,', 'fullish', 'and', 'a', 'bit', 'wide', 'outside', 'off', 'and', 'Kohli', "doesn't", 'bother', 'with', 'it.', 'Touch', 'of', 'outswing', 'for', 'him', 'straight', 'away']
+
+
+ans::
+[['1.1'], ['Southee', 'to', 'Kohli,', 'no', 'run,', 'fullish', 'and', 'a', 'bit', 'wide', 'outside', 'off', 'and', 'Kohli', "doesn't", 'bother', 'with', 'it.', 'Touch', 'of', 'outswing', 'for', 'him', 'straight', 'away']]
+
+
+
+
+input

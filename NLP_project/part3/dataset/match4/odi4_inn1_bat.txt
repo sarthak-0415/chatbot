@@ -1,0 +1,7 @@
+RG Sharma,c Ronchi b Williamson,79,131,94,6,4,84.04,India
+V Kohli,c Neesham b Southee,2,14,10,0,0,20.00,India
+AM Rahane,c Southee b Mills,3,22,8,0,0,37.50,India
+AT Rayudu,c Ronchi b Bennett,37,64,58,3,2,63.79,India
+MS Dhoni,not out,79,111,73,6,3,108.21,India
+R Ashwin,c Bennett b Southee,5,3,3,1,0,166.66,India
+RA Jadeja,not out,62,78,54,8,2,114.81,India

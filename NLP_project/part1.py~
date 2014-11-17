@@ -1,0 +1,1087 @@
+####...... ASSUMPTIONS.....
+# 1. over numbers given in query must be in digits not words
+# 2. first letter of names of players must be capitalized
+
+import nltk	
+import sys
+import re
+import textblob
+from textblob import TextBlob
+import os
+from nltk.util import ngrams
+
+os.system('clear')
+q1=""
+q_ques=[]
+q_desc=[]
+comm =[]
+parse_query=[]
+over = 'None'
+constraint = 'None'
+number = 0
+player = 'None'
+country ='None'
+
+def add_to_dict_player(dictionary, fname):
+	f = open(fname, 'r')
+	for line in f:
+		temp = line[:-1]
+		temp = temp.split('\t')
+		a=temp[0]
+		#print a
+		b=temp[1:]
+		if a not in dictionary:
+			dictionary[a] = b
+
+def parse_for_commentary(file):
+	
+	commentary = open(file,'r')
+
+	commentary_parse= []
+	ans = []
+	
+	for line in commentary:
+		temp1 = line[:-1]
+		temp2 = temp1.split(' ')
+		for i in range(0,len(temp2)):
+			#print temp2[i]
+			if (len(temp2[i]) !=0 ):
+				temp2[i]=re.sub('[^0-9a-zA-Z .-]+', '', str(temp2[i]))
+				#temp2[i]=re.sub('[.]+', '$', str(temp2[i]))
+				'''
+				for symbol in temp2[i]:
+					if str(symbol) == '':
+						index = temp2[i].index(symbol)
+						
+						prev_tag =''
+						next_tag =''
+						symbol_prev =''
+						symbol_next = ''
+						prev_index = index -1
+						if prev_index > 0:
+							symbol_prev = temp2[i][prev_index]
+							#print symbol_prev
+							symbol_prev = TextBlob(str(symbol_prev))
+							prev_tag = symbol_prev.tags
+							#print 'tag:'
+							#print prev_tag
+							if(len(prev_tag) >0):
+								temp = str(prev_tag[0]).split(', u')
+								prev_tag=re.sub('[^0-9a-zA-Z]+', '', str(temp[1]))
+							#print next_tag
+
+						next_index = index +1
+						if next_index < len(temp2[i]):
+							symbol_next = temp2[i][next_index]
+							#print symbol_next
+							symbol_next = TextBlob(str(symbol_next))
+							next_tag = symbol_next.tags
+							#print 'tag:'
+							#print next_tag
+							if(len(next_tag) >0):
+								temp = str(next_tag[0]).split(', u')
+								next_tag=re.sub('[^0-9a-zA-Z]+', '', str(temp[1]))
+							#print next_tag
+							
+						if ( (next_tag=='CD' or next_tag == 'LS' or str(symbol_next) == '2' or str(symbol_next) == '4') and ( prev_tag=='CD' or prev_tag == 'LS' or str(symbol_next) == '2' or str(symbol_next) == '4')) :
+							print temp2[i]
+							temp2[i].replace('$','.')
+				'''
+		commentary_parse.append(temp2) 
+	
+	return commentary_parse
+
+def select_commentary(player_type, player_data, parse_query):
+	
+	global comm
+	global q_desc
+	
+	#print 'ques:'
+	#print q1
+	#print player_data
+	f1 = './dataset/match'
+	f2 = './dataset/match'
+	
+	match = parse_for_match_no(parse_query)
+	match = re.sub('[ ]+', '', str(match))
+	
+	if(player_data != 'None'):
+		
+		player_country_data = player_data[3]
+		country_temp = player_country_data.split(',')
+		country1 = country_temp[0]
+		country1 = re.sub('[ ]+', '', str(country1))
+		country = country1.lower()
+
+	else:
+		
+		query_temp = parse_query.split('.')
+		desc_temp = query_temp[1]
+		q_desc = desc_temp.split (' ')
+		
+		for i in range(0,len(q_desc)):
+			word = q_desc[i].lower()
+			
+			if word== 'india':
+				country = 'india'
+				
+			elif word == 'new':
+				next_word = q_desc[i+1]
+				if next_word.lower() == 'zealand':
+					country = 'newzealand'	
+	
+	if(country == 'india'):
+		not_country = 'newzealand'
+	else:
+		not_country = 'india'	
+	
+	if(player_type!= 'None'):
+		if(player_type == 'bowler'):
+			f1 += str(match) + '/odi' + str(match)+ '_' +  str(not_country) + '_commentary.txt'	
+		
+		else:
+			f1 += str(match) + '/odi' + str(match)+ '_' + str(country) + '_commentary.txt'
+		
+		#print 'f1'
+		#print f1
+		comm = parse_for_commentary(f1)
+			
+	else:
+		
+		f1 += str(match) + '/odi' + str(match)+ '_' + str(country) + '_commentary.txt'
+		f2 += str(match) + '/odi' + str(match)+ '_' +  str(not_country) + '_commentary.txt'	
+		
+		#print 'f1 + f2'
+		#print f1
+		#print f2
+		
+		comm = parse_for_commentary(f1)
+		comm = parse_for_commentary(f2)
+		
+	return comm				
+
+
+def q_info(ques):
+	
+	matchno="none"
+	for q in range (0, len(ques)):
+		
+		if((ques[q]=='match,')or(ques[q]=='match.')or(ques[q]=='match')):
+			
+			if(((ques[q-1]=='first')or(ques[q-1]=='second')or(ques[q-1]=='third')or(ques[q-1]=='fourth')or(ques[q-1]=='fifth'))or((ques[q-1]=='one')or(ques[q-1]=='two')or(ques[q-1]=='three')or(ques[q-1]=='four')or(ques[q-1]=='five'))):
+				
+				matchno=ques[q-1]
+				
+			elif(((ques[q+1]=='first')or(ques[q+1]=='second')or(ques[q+1]=='third')or(ques[q+1]=='fourth')or(ques[q+1]=='fifth'))or((ques[q+1]=='one')or(ques[q+1]=='two')or(ques[q+1]=='three')or(ques[q+1]=='four')or(ques[q+1]=='five'))):	
+				
+				matchno=ques[q+1]
+				
+	#print "match_no"
+	#print matchno
+	return matchno
+
+def parse_ques():
+	global parse_query
+	global q1
+	
+	q1=re.sub('[^0-9a-zA-Z ]+', '', str(q1))
+	q=q1.split(' ')
+	
+	for i in range (0,len(q)):
+		
+		if((q[i]=='match,')or(q[i]=='match.')or(q[i]=='match')):
+			#print 'inside'
+			m_no=q_info(q[:i+2])
+			#print m_no
+			qnew=q[i+1:]
+			
+		if((q[i]=='which')or(q[i]=='who')):
+			
+			#print "q_ques"
+			#print q[i:]
+			q_ques=q[i:]
+			
+			for k in range (0,len(qnew)):
+				
+				if((qnew[k]=='which')or(qnew[k]=='who')):
+					
+					qnew=qnew[:k]
+					q_desc=qnew	
+					#print "q_desc"
+					#print q_desc
+					parse_q_desc =''
+					parse_q_ques=''
+					parse_query=''
+					parse_m_no= str(m_no)+' ' + '.'
+					
+					for elements in q_desc:
+						parse_q_desc = str(parse_q_desc) +str(elements) +' ' 
+					parse_q_desc = parse_q_desc[:-1]
+					parse_q_desc = str(parse_q_desc) +'.'
+					
+					for elements in q_ques:
+						parse_q_ques = str(parse_q_ques) + str(elements) +' '
+					
+					parse_query = str(parse_m_no) +str(parse_q_desc) +str(parse_q_ques)
+					
+					parse_query=re.sub('[^0-9a-zA-Z .]+', '', str(parse_query))
+					#print parse_query
+					return parse_query
+					break
+
+
+def parse_for_match_no(player_data):
+	
+	data_temp1 = player_data.split('.')
+	
+	match1 = data_temp1[0]
+	match2 = match1.lower()
+	match = str(match2)
+	match = re.sub('[ ]+','', str(match))
+	
+	
+	if (match == 'one' or match == 'first'):
+		return 1
+	elif( match == 'two' or match == 'second'):
+		return 2
+	elif( match == 'three' or match == 'third'):
+		return 3
+	elif( match == 'four' or match == 'fourth'):
+		return 4
+	elif( match == 'five' or match == 'fifth'):
+		return 5				
+
+
+def parse_for_player_type(parse_query):
+	desc=parse_query.split('.')
+	desc=desc[1]
+	q_desc=desc.split(' ')
+	for i in q_desc:
+		#print i
+		if (i=='bowled'or i=='wickets' or i=='wicket' or i=='economy rate' or i=='no ball' or i=='no balls' or i=='wide' or i=='wides'):
+			return 'bowler'
+		
+		elif (i=="four" or i=="six" or i=="strike rate" or i=='out' or i=='dismissed' or i=='fours' or i=='sixes' or i=='hit'):
+			return 'batsman'
+
+
+def parse_for_player_data(india, nz, ques_data):
+
+	global player
+	global country
+	global over
+	over =''
+	player_data = 'None'
+	q_data=ques_data.split('.')
+	
+	q_de=q_data[1]
+	q_desc=q_de.split(' ')
+	
+	#print 'prntitng'
+	#print q_desc
+	
+	q_desc_string =''
+	for i in q_desc:
+		q_desc_string += str(i) + ' '
+	q_desc_string = q_desc_string[:-1]
+	#print 'prntitng'
+	#print q_desc_string
+	
+	unigram = ngrams(q_desc_string.split(), n=1)
+	unigram_string = []
+	for i in unigram :
+		string = ''
+		for j in i :
+			string += str(j) + ' '
+		string = string[:-1]
+		unigram_string.append(string)
+	#print unigram_string
+
+	bigram = ngrams(q_desc_string.split(), n=2)
+	bigram_string = []
+	for i in bigram :
+		string = ''
+		for j in i :
+			string += str(j) + ' '
+		string = string[:-1]
+		bigram_string.append(string)
+	#print bigram_string
+	
+
+	for word in unigram_string:
+		for key in nz :
+			#print key
+			name = key.split(' ')
+			#print name[1]
+			if  (word == name[1]):
+				player = word
+				country ='newzealand'
+				player_data =nz[key]
+
+	for word in bigram_string:
+		for key in nz :
+			if word == key :
+				player = word
+				country ='newzealand'
+				player_data =nz[key]
+	
+	for word in unigram_string:
+		for key in india :
+			#print key
+			name = key.split(' ')
+			#print name[1]
+			if  (word == name[1]):
+				player = word
+				country ='india'
+				player_data =india[key]
+
+	for word in bigram_string:
+		for key in india :
+			if word == key :
+				player = word
+				country ='india'
+				player_data =india[key]
+	
+	for word in q_desc:
+		'''
+		for key in nz:
+			#print key
+			name = key.split(' ')
+			#print name[1]
+			if  (word == name[1]):
+				player = word
+				country ='newzealand'
+				player_data =nz[key]
+
+		for key in india:
+			name = key.split(' ')
+			#print name[1]
+			if  (word == name[1]):
+				player = word
+				country= 'india'
+				player_data =india[key]
+		'''
+		
+		if (str(word) == 'over' or str(word) == 'overs'):
+			#this needs to be changed....it should be if next or previous is some number in numeral or word form
+			prev_tag =''
+			next_tag =''
+
+			next_index = q_desc.index(word) +1
+			if (next_index < len (q_desc)):
+				word_next = q_desc[next_index]
+				word_next = TextBlob(str(word_next))
+				next_tag = word_next.tags
+				#print 'tag:'
+				#print next_tag
+				temp = str(next_tag[0]).split(', u')
+				next_tag=re.sub('[^0-9a-zA-Z]+', '', str(temp[1]))
+				#print next_tag
+			
+			prev_index = q_desc.index(word) -1
+			if (prev_index > 0):
+				word_prev = q_desc[prev_index]
+				word_prev = TextBlob(str(word_prev))
+				prev_tag = word_prev.tags
+				#print 'tag:'
+				#print prev_tag
+				temp = str(prev_tag[0]).split(', u')
+				prev_tag=re.sub('[^0-9a-zA-Z]+', '', str(temp[1]))
+				#print next_tag
+				
+			if next_tag=='CD' or prev_tag == 'LS' or str(word_next) == '2' or str(word_next) == '4':
+				over = str(word_next)
+
+			if prev_tag == 'CD' or prev_tag == 'LS' or str(word_prev) == '2' or str(word_prev) == '4':
+				over = str(word_prev)
+			
+			
+	'''
+	print 'player::'
+	print player
+	print 'country::'
+	print country
+	print 'over::'
+	print over
+	'''
+	return player_data
+
+						
+def ans_for_case(parse_query,player_data):
+	query =parse_query.split('.')
+	#print query
+	temp_info = query[0]
+	temp_desc = query[1]
+	temp_ques = query[2]
+	info = temp_info.split(' ')
+	desc = temp_desc.split(' ')
+	ques = temp_ques.split(' ')
+	case=0
+	
+	for word1 in desc:
+		word =word1.lower()
+		#print word
+		if word =='hit' or  word =='hits' or word =='stroke':
+			desc_case =1
+			break
+		if word =='over' or word =='ball' or word =='overs' or word =='balls' :
+			desc_case =3
+			break
+		if word == 'out' or  word =='dismissed' or word == 'OUT' :
+			desc_case =3
+			break
+		if word == 'bowled'  or word =='no' or word =='wide' or word =='wides' :
+			desc_case= 4
+			break
+	
+	#print desc_case
+
+	for word1 in ques:
+		word = word1.lower()
+		word=re.sub('[^0-9a-zA-Z]+', '', str(word))
+		
+		#print word
+		if word =='ball' or word =='balls' or word =='ball(s)':
+			ques_case ='a'
+			break
+		if word =='over' or word =='overs' or word =='over(s)' :
+			ques_case ='b'
+			break
+		if word =='dismissed' or word =='dismisseds' or word =='dismissed(s)':
+			ques_case ='c'
+			break
+		if word == 'hit' or word == 'hits' or word == 'hit(s)' :
+			ques_case='d'
+			break
+		if word == 'bowler' or word == 'bowlers' or word == 'bowler(s)' :
+			ques_case='e'
+			break
+
+	#print ques_case
+
+	case =str(desc_case) +' '+ str(ques_case)
+	
+	return case
+
+def ans_for_desc(desc_case,commentary_parse):
+
+	ans= []
+	global parse_query
+	no_type = 'None'
+	
+	query =parse_query.split('.')
+	temp_info = query[0]
+	temp_desc = query[1]
+	temp_ques = query[2]
+	info = temp_info.split(' ')
+	desc = temp_desc.split(' ')
+	ques = temp_ques.split(' ')
+	
+	number = 0
+	constraint = 'None'
+	runs=''
+
+	if (desc_case == '1'):
+		for i in range(0, len(desc)):
+			word = desc[i].upper()
+			if (str(word) == 'ONE') or (str(word) == 'FOUR') or (str(word) == 'SIX') or (str(word) == 'TWO') or (str(word) == 'ONES')or (str(word) == 'SIXES')or (str(word) == 'FOURS')or (str(word) == 'TWOS'):
+				
+				if (str(word) == 'ONE') or (str(word) == 'ONES'):
+					runs = 'ONE'
+				if (str(word) == 'TWO') or (str(word) == 'TWOS'):
+					runs = 'TWO'
+				if (str(word) == 'FOUR') or (str(word) == 'FOURS'):
+					runs ='FOUR'
+				if (str(word) == 'SIX') or (str(word) == 'SIXES'):
+					runs ='SIX'
+				prev = re.sub('[^0-9]+', ' ', str(desc[i-1]))
+		
+				if(prev != ' '):
+					number = desc[i-1]
+					
+		if(number==0):
+			for j in desc:
+				i = j.upper()
+				if(i == 'MAX' or i == 'MAXIMUM' ):
+					print 'inside'
+					constraint = 'MAX'		
+				if(i == 'MIN' or i == 'MINIMUM'):	
+					constraint = 'MIN'
+		
+		if (number != 0):
+			parse_query = parse_query + str('.') + number	
+		elif(constraint != 'None'):
+			parse_query = parse_query + str('.') + constraint		
+		
+			
+		for line in commentary_parse:
+			j=0
+			for word in line:
+				prev_word_index = line.index(word) -1
+				prev_word = line[prev_word_index]
+				prev_word_u = prev_word.upper()
+				if (str(word) == player and prev_word_u == 'TO') and j<5:
+					i=0
+					
+					for word3 in line:
+						word2=word3.upper()
+						
+						word2 = re.sub('[^A-Za-z]+', '', str(word2))
+						
+						if (str(word2) == str(runs)) and (i<10):
+							prev_index = commentary_parse.index(line) -1
+							line_prev = commentary_parse[prev_index]
+							ans.append(line_prev)
+							ans.append(line)
+							#print 'line::'
+							#print line							
+							break
+						i +=1
+					break	
+				j+=1
+
+	if (desc_case == '2'):
+
+		for i in range(0, len(desc)):
+			word = desc[i].upper()
+			if (str(word) == 'OVER' or str(word) == 'OVERS'or str(word) =='OVERS(S)'):
+				
+				prev = re.sub('[^0-9]+', ' ', str(desc[i-1]))
+		
+				if(prev != ' '):
+					number = desc[i-1]
+					
+		if(number==0):
+			for j in desc:
+				i = j.upper()
+				if(i == 'MAX' or i == 'MAXIMUM' ):
+					constraint = 'MAX'		
+				if(i == 'MIN' or i == 'MINIMUM'):	
+					constraint = 'MIN'		
+		if (number != 0):
+			parse_query = parse_query + str('.') + number	
+		elif(constraint != 'None'):
+			parse_query = parse_query + str('.') + constraint
+
+
+		for line in commentary_parse:
+			j=0
+			for word in line:
+				prev_word_index = line.index(word) -1
+				prev_word = line[prev_word_index]
+				prev_word_l = prev_word.lower()
+				if (str(word) == player and prev_word_l == 'to') and j<5:
+					i=0
+					for word2 in line:
+						if (str(word2) == 'over' or  str(word2) =='overs' or str(word2) == 'over(s)') and (i<5):
+							prev_index = commentary_parse.index(line) -1
+							line_prev = commentary_parse[prev_index]
+							ans.append(line_prev)
+							ans.append(line)
+							#print line
+							break
+						i+=1
+					break
+				j+=1
+
+	if (desc_case == '3'):
+		for i in range(0, len(desc)):
+			word = desc[i].upper()
+			if (str(word) == 'OUT' or str(word) == 'DISMISSED'):
+				
+				prev = re.sub('[^0-9]+', ' ', str(desc[i-1]))
+		
+				if(prev != ' '):
+					number = desc[i-1]
+					
+		if(number==0):
+			for j in desc:
+				i = j.upper()
+				if(i == 'MAX' or i == 'MAXIMUM' ):
+					constraint = 'MAX'		
+				if(i == 'MIN' or i == 'MINIMUM'):	
+					constraint = 'MIN'		
+		if (number != 0):
+			parse_query = parse_query + str('.') + number	
+		elif(constraint != 'None'):
+			parse_query = parse_query + str('.') + constraint
+
+
+		for line in commentary_parse:
+			j=0
+			for word in line:
+				prev_word_index = line.index(word) -1
+				prev_word = line[prev_word_index]
+				prev_word_l = prev_word.lower()
+				if (str(word) == player and prev_word_l == 'to') and j<5:
+					i=0
+					for word2 in line:
+						if (str(word2) == 'out' or  str(word2) =='dismissed' or str(word2) == 'OUT') and (i<7):
+							prev_index = commentary_parse.index(line) -1
+							line_prev = commentary_parse[prev_index]
+							ans.append(line_prev)
+							ans.append(line)
+							#print line
+							break
+						i+=1
+					break
+				j+=1
+						
+			
+
+	if (desc_case == '4'):
+
+		for i in range(0, len(desc)):
+			word = desc[i].upper()
+			if (str(word) == 'WIDE' or str(word) == 'WIDES' or str(word) == 'NO'):
+				
+				if(str(word)== 'NO'):
+					extra = 'no'
+					if desc[i+1].upper == 'RUN' or desc[i+1].upper() == 'RUNS':
+						no_type = 'run'
+					elif desc[i+1].upper == 'BALL' or desc[i+1].upper() == 'BALLS':
+						no_type = 'ball'
+				else :
+					extra = 'wide'
+				prev = re.sub('[^0-9]+', ' ', str(desc[i-1]))
+		
+				if(prev != ' '):
+					number = desc[i-1]
+					
+		if(number==0):
+			for j in desc:
+				i = j.upper()
+				if(i == 'MAX' or i == 'MAXIMUM' ):
+					#print 'inside22'
+					constraint = 'MAX'		
+				if(i == 'MIN' or i == 'MINIMUM'):	
+					constraint = 'MIN'		
+		if (number != 0):
+			parse_query = parse_query + str('.') + number	
+		elif(constraint != 'None'):
+			parse_query = parse_query + str('.') + constraint
+
+		print parse_query
+		for line in commentary_parse:
+			
+			#include the code for (n)wides as well ,this is calculating just wides..question can be of the form 2 wides or so 
+			j=0
+			for word in line:
+				next_word_index = line.index(word) +1
+				if  len(line) > next_word_index:
+					next_word = line[next_word_index]
+					next_word_l = next_word.lower()
+					if (str(word) == player and next_word_l == 'to') and j<5:
+					
+						i=0
+						for word1 in line:
+							word2 = word1.lower()
+							
+							next_word_index2 = line.index(word1) +1
+							if  len(line) > next_word_index2:
+								next_word2 = line[next_word_index2]
+								next_word2l = next_word2.lower()
+								# word2
+								if (str(word2) == 'no')  and (str(next_word2l)== no_type) and (i<5) and (extra =='no'):
+								#condition is getting true for all cases dont know why   check later
+								# case of no ball ans no runs.....DONE
+									#print 'wide/no'
+									next_index = commentary_parse.index(line) -1
+									line_next = commentary_parse[next_index]
+									ans.append(line_next)
+									ans.append(line)
+									#print line
+								
+								
+								elif( str(word2) == 'wide' or  str(word2) =='wides' )  and (i<5) and (extra == 'wide'):
+								#condition is getting true for all cases dont know why   check later
+								# case of no ball ans no runs.....DONE
+									#print 'wide/no'
+									next_index = commentary_parse.index(line) -1
+									line_next = commentary_parse[next_index]
+									ans.append(line_next)
+									ans.append(line)
+									#print line
+								i+=1
+						break
+					j+=1
+					
+	return ans
+
+def ans_for_ques(ques_case,commentary_parse,ans_desc,parse_query):
+	
+	ans =[]
+	dictionary ={}
+	global over
+	global constraint
+	global number
+	
+	temp_extra = parse_query.split('.')
+	if(len(temp_extra)>3):
+		if temp_extra[3].isdigit():
+			number = temp_extra[3]
+		else:
+			constraint = temp_extra[3]	
+	
+	if(ques_case == 'a'):
+		
+		if len(over) >0:
+			for line in ans_desc:
+				if(str(line[0][0]).isdigit() == True):
+					overs = str(line[0]).split('.')
+					#print 'over :::::' + overs[0]
+					if overs[0] != over:
+						index = ans_desc.index(line)
+						ans_desc.remove(ans_desc[index])
+						ans_desc.remove(ans_desc[index-1])
+		
+		for line in ans_desc:
+			if(str(line[0][0]).isdigit() == True):
+				overs = str(line[0]).split('.')
+				ans.append(overs[1])
+
+	if(ques_case == 'b'):
+		
+		if(number !=0):
+			#print number
+			for line in ans_desc:
+				t=str(line[0][0])
+				if t.isdigit() :
+					
+					over_temp = line[0].split('.')
+					over = over_temp [0]
+					#print over
+					if over not in dictionary:
+						dictionary[over] = 1
+					else:
+						dictionary[over] += 1
+			
+			#print 'DICTIONARY'
+			
+			for key in dictionary:
+				#print '----'
+				#print key
+				#print dictionary[key]
+				if int(dictionary[key]) == int(number) :
+					ans.append(key)		
+		
+		elif(constraint != 'None'):
+			
+			#print constraint
+			for line in ans_desc:
+				t=str(line[0][0])
+				if t.isdigit() :
+					
+					over_temp = line[0].split('.')
+					over = over_temp [0]
+					#print over
+					if over not in dictionary:
+						dictionary[over] = 1
+					else:
+						dictionary[over] += 1
+			
+			
+			if(constraint == 'MAX'):
+					max_val = 1
+					for key in dictionary:
+						#print key
+						#print dictionary[key]
+						if dictionary[key] > max_val :
+							max_val = dictionary[key]
+							
+					for key in dictionary:
+						if dictionary[key] >= max_val:
+							ans.append(key)	
+					print 'max'
+					print max_val		
+			else:
+				min_val = 100
+				for key in dictionary:
+					if dictionary[key] < min_val :
+						min_val = dictionary[key]
+							
+				for key in dictionary:
+					if dictionary[key] <= min_val:
+						ans.append(key)	
+				#print min_val
+				 				
+		else:
+			
+			for line in ans_desc:
+				if(str(line[0][0]).isdigit() == True):
+					overs = str(line[0]).split('.')
+					ans.append(overs[0])
+
+	if(ques_case == 'c'):
+		
+		
+		if len(over) >0:
+			for line in ans_desc:
+				if(str(line[0][0]).isdigit() == True):
+					overs = str(line[0]).split('.')
+					#print 'over :::::' + overs[0]
+					if overs[0] != over:
+						index = ans_desc.index(line)
+						ans_desc.remove(ans_desc[index])
+						ans_desc.remove(ans_desc[index-1])
+					
+
+		for line in ans_desc:
+			if len(line) > 1:
+				temp = str(line[1]).upper()
+				#print temp
+				if( temp== 'TO'):
+					#print 'line::'
+					#print line
+					ans.append(line[0])
+		
+	if(ques_case == 'd'):
+		
+		
+		if len(over) >0:
+			for line in ans_desc:
+				if(str(line[0][0]).isdigit() == True):
+					overs = str(line[0]).split('.')
+					#print 'over :::::' + overs[0]
+					if overs[0] != over:
+						index = ans_desc.index(line)
+						ans_desc.remove(ans_desc[index])
+						ans_desc.remove(ans_desc[index-1])
+		
+		if(number !=0):
+			#print number
+			for line in ans_desc:
+				if len(line) > 1:
+					for word in line:
+						temp = str(word).upper()
+						prev_index = line.index(word) -1
+						if( temp== 'TO'):
+							batsman = line[prev_index]
+							if batsman not in dictionary:
+								dictionary[batsman] = 1
+							else:
+								dictionary[batsman] += 1
+			
+			#print 'DICTIONARY'
+			
+			for key in dictionary:
+				#print '----'
+				#print key
+				#print dictionary[key]
+				if int(dictionary[key]) == int(number) :
+					ans.append(key)					
+		
+		
+		if(constraint != 'None'):
+			for line in ans_desc:
+				if len(line) > 1:
+					for word in line:
+						temp = str(word).upper()
+						prev_index = line.index(word) -1
+						if( temp== 'TO'):
+							batsman = line[prev_index]
+							if batsman not in dictionary:
+								dictionary[batsman] = 1
+							else:
+								dictionary[batsman] += 1
+				
+			if(constraint == 'MAX'):
+				max_val = 1
+				for key in dictionary:
+					if dictionary[key] > max_val :
+						max_val = dictionary[key]
+									
+				for key in dictionary:
+					if dictionary[key] >= max_val:
+						ans.append(key)	
+			else:
+				min_val = 100	
+				for key in dictionary:
+					#print key
+					#print dictionary[key]
+					if dictionary[key] < min_val :
+						min_val = dictionary[key]
+									
+				for key in dictionary:
+					if dictionary[key] <= min_val:
+						ans.append(key)
+					
+				
+				
+		else:				
+			for line in ans_desc:
+				if len(line) > 1:
+					temp = str(line[1]).upper()
+					#print temp
+					if( temp== 'TO'):
+						#print 'line::'
+						#print line
+						ans.append(line[2])
+
+	if(ques_case == 'e'):
+		
+		
+		if over != 'None':
+			print 'over'
+			print over + '.'
+			for line in ans_desc:
+				if(str(line[0][0]).isdigit() == True):
+					overs = str(line[0]).split('.')
+					#print 'over :::::' + overs[0]
+					if overs[0] != over:
+						index = ans_desc.index(line)
+						ans_desc.remove(ans_desc[index])
+						ans_desc.remove(ans_desc[index-1])
+		
+		if(number !=0):
+			#print number
+			for line in ans_desc:
+				if len(line) > 1:
+					for word in line:
+						temp = str(word).upper()
+						prev_index = line.index(word) -1
+						if( temp== 'TO'):
+							#print 'temp'
+							#print temp
+							bowler = line[prev_index]
+							#print bowler
+
+							if bowler not in dictionary:
+								dictionary[bowler] = 1
+							else:
+								dictionary[bowler] += 1
+			
+			#print 'DICTIONARY'
+			
+			for key in dictionary:
+				#print '----'
+				#print key
+				#print dictionary[key]
+				if int(dictionary[key]) == int(number) :
+					ans.append(key)		
+		
+		
+		elif(constraint != 'None'):
+			
+			for line in ans_desc:
+				if len(line) > 1:
+					for word in line:
+						temp = str(word).upper()
+						prev_index = line.index(word) -1
+						if( temp== 'TO'):
+							#print 'temp'
+							#print temp
+							bowler = line[prev_index]
+							#print bowler
+
+							if bowler not in dictionary:
+								dictionary[bowler] = 1
+							else:
+								dictionary[bowler] += 1
+						
+						
+			if(constraint == 'MAX'):
+				max_val = 1
+				for key in dictionary:
+					if dictionary[key] > max_val :
+						max_val = dictionary[key]
+									
+				for key in dictionary:
+					if dictionary[key] >= max_val:
+						ans.append(key)	
+			else:
+				min_val = 100	
+				for key in dictionary:
+					#print key
+					#print dictionary[key]
+					if dictionary[key] < min_val :
+						min_val = dictionary[key]
+									
+				for key in dictionary:
+					if dictionary[key] <= min_val:
+						ans.append(key)
+				
+				
+		else:
+			for line in ans_desc:
+				if len(line) > 1:
+					temp = str(line[1]).upper()
+					#print temp
+					if( temp== 'TO'):
+						#print 'line::'
+						#print line
+						ans.append(line[0])
+		
+		
+
+	return ans
+
+def main():
+
+	global parse_query
+	global q1
+	
+	#q1="in fourth match Ashwin bowled maximum no balls in which over?"
+	q1 = raw_input('input (following grammar)\n')	
+	f3='./dataset/player_profile/indian_players_profile.txt'
+	f4='./dataset/player_profile/nz_players_profile.txt'
+	
+	india={}
+	nz={}
+	
+	add_to_dict_player(india,f3)
+	add_to_dict_player(nz,f4)
+	#print india
+	#print nz
+	#q1 =raw_input()
+	
+	parse_query=parse_ques()
+	
+	
+	match=parse_for_match_no(parse_query)
+	#print 'match::'
+	#print match
+	
+	player_data =parse_for_player_data(india, nz, parse_query)
+	#print 'player_data::'
+	#print player_data
+
+	player_type= parse_for_player_type(parse_query)
+	
+	
+	#print 'player_type::'
+	#print player_type
+	
+	#print 'player::'
+	#print player
+	#print 'country::'
+	#print country
+	#print 'over::'
+	#print over
+	
+	comm = select_commentary(player_type, player_data , parse_query)
+	
+	cases = ans_for_case(parse_query ,player_data)
+	#print player_data
+	#print 'case::'
+	#print cases
+
+	case =cases.split(' ')
+	desc_case = case[0]
+	ques_case = case[1]
+	
+	
+	ans_desc = ans_for_desc(desc_case,comm)
+	print '\nans_desc::'
+	print ans_desc
+			
+	print '\nparse_query::'
+	print parse_query
+
+	ans_ques = ans_for_ques(ques_case,comm,ans_desc,parse_query)
+	print '\nans_ques::'
+	print ans_ques
+	
+	
+if __name__ == "__main__":
+	main()

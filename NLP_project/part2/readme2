@@ -1,0 +1,41 @@
+abstract::
+-we have used the  NLP  toolkit  :  “nltk”  in  python,  to  implement  a  First order Predicate  Logic  based  “query prover”  and "question  answering  system”  for a recent cricket ODI series datase
+
+description ::
+-building the database into dictionaries from the text files given on crickinfo.com
+-buliding a set of predicates that will help us to prove the query later(the number of predicates are now limited but can be extended**)
+-parsing the question on the basis of grammar and extracting the keywaords used to evaluate the query.
+-generating the query to be feeded in nltk.evalaute function(this is done in first order logic)
+-evaluating the above generated query and getting the desired answer.
+
+Rough grammar ::
+<main question> : <quantifier info> <description 1> <connector> <description 2>
+
+<quantifier info> : “for all matches” | “for all innings” | “there exists player” | “there exists a match”
+
+<description1>,  <description2>  :  will  be  related  to  any  of  the predicates(given in the predicate list)  like  strikelt  :  strike  rate less than 100
+
+<connector> : “and” | “if ­ then” | “is given to” | “consists of” | “contains” 
+
+run command*
+>> python part2.py <input2 >output2
+
+*take the assumptions given in the start of each code
+** predicates invloved are :
+'player of match',
+'player of winning team',
+'losing side','duck',
+'strike rate of player is above 200',
+'more sixes than four',
+'winning side',
+'at least 1 boundary',
+'strike rate was below 100',
+'scored more than 50 runs',
+'atleast 1 wicket',
+'bowled more than 7 overs',
+'failed to get any wicket',
+'did not claim any wicket',
+'more than 8 runs per',
+'scored more than hundred',
+'the team lost',
+'less than 26 years old'

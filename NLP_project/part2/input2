@@ -1,0 +1,9 @@
+7
+For all matches, player of match award is given to player of winning team.
+For all matches, losing side consists of at least 1 ducks in the batting innings.
+For all innings, if strike   rate  of  player  is  above  200.0  then  he  has  hit  more  sixes  than fours.
+For  all  matches,  winning  side contains at least 1 player who  hit at least 1 boundary(no. of 4s) yet his strike rate was below 100.
+There  exists   player(s)  in   the  series, who  have  scored  more  than  50  runs  in batting and claimed at least 1 wicket (1 or more) in bowling, in the same match.
+For  all  matches,  for  any  side,  there  exist  at  least  1  bowler  who  has  bowled  more  than 7 overs and failed to get any wicket.
+In   any  of  the  matches,  there  exists  a  bowler  who  did  not  claim  any  wicket  and  went  for
+more than 8 runs per over (economy > 8.00).

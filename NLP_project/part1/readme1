@@ -1,0 +1,27 @@
+abstract::
+-this program deals with questions to be answered(following a specific grammar)that will require string parsing and text processing of the commentary data.
+-giving the answer to those query ,based on our knowledge(dataset).
+
+description ::
+-this program includes parsing the question on the basis of grammar and extracting the keywaords used to evaluate the query.
+-extracting the information of the player of interest of the datatbase of crickinfo.com 
+-selecting the correct commentary file for searching
+-searching the query on the basis of our question and returning the lines of interest
+-extracting the information requested from those lines and printing the answer.
+
+Rough grammar ::
+<full question> : <info about match> <description> <question>
+
+<info about match> : first | second | third | fourth | fifth 
+
+<description> : this will contain information about few / all of the following: 
+	1. player  hitting  Ones  /  Twos  /  Fours  /  Sixes  (optional  number  or 	“maximum” ­  may be specified like player1 hit 3 sixes)
+	2. about the specific over(or there may not be any specific over given)
+	3. player getting out4.   player  bowling  wide  /  no  ball  (optional  number  or  “maximum”  may  be specified)
+
+<question>  :  which  ball  |  which  over   |  who  dismissed   | who hit | which bowler
+
+run command*
+>> python part1.py <input1 >output1
+
+*take the assumptions given in the start of each code

@@ -1,0 +1,6 @@
+KD Mills,10,1,35,2,3.50,(1w),New Zealand
+MJ McClenaghan,10,0,45,0,4.50,(1w),New Zealand
+MJ Henry,10,1,38,4,3.80,(2w),New Zealand
+JDS Neesham,5.4,0,45,1,7.94,,New Zealand
+NL McCullum,10,1,33,1,3.30,,New Zealand
+KS Williamson,4,0,19,2,4.75,(1nb),New Zealand
